@@ -5,6 +5,10 @@
 // establish the global variables that will be used later.
 var length;
 var charType;
+var output;
+var final;
+var allRandom;
+var types;
 
 // create strings of text for random string generators to call upon
 var alpha= "abcdefghijklmnopqrstuvwxyz";
@@ -53,12 +57,13 @@ function generatePassword () {
   }
   
   // Allows user to choose which character sets they would like to be included in their randomly-generated password. A confirm() window will let user know what was logged as their response.
-  // A response that does not specify at least one of the requested letters (N,U,L, or S) will result in a confirmation that all criteria are being selected (as a default).
+  // A response that does not specify at least one of the requested letters (U,L,N, or S) will result in a confirmation that all criteria are being selected (as a default).
   function getChartypes(){
     types=(prompt("Would you like to include uppercase letters [U], lowercase letters [L], numerals (0-9) [N], and/or special characters [S](!#$%&'()*+,-./:;<=>?@[\]^_`{|}~)? Please respond with the specified letter(s) in brackets [U,L,N,S]. A response that does not include any of these letters will default in choosing ALL criteria."))
-    types=types.toUpperCase()    
+    types=types.toUpperCase()
+    types=types.split("")    
     console.log("User chose " + types + ".")
-    if (types.includes("N"||"U"||"L"||"S")){
+    if (types.includes("U")||types.includes("L")||types.includes("N")||types.includes("S")){
     window.confirm("You chose " + types + ". Click OK to continue.") 
     }else {
       window.confirm("You chose ALL types. Click OK to continue.")
@@ -81,9 +86,10 @@ function generatePassword () {
     }
     if (types.includes("S")) {
       allRandom= allRandom + superGen(special)
-    }else {
+    }else if (!(types.includes("U")||types.includes("L")||types.includes("N")||types.includes("S"))){
       allRandom=allRandom+ superGen(alpha) + superGen(ALPHA) + superGen(numeral) + superGen(special)
     }
+    return allRandom
   }
   
   // This function takes the "allRandom" string that results from the concatenation of the strings that were randomly generated from the character sets that the user chose to include.
@@ -98,11 +104,11 @@ function generatePassword () {
   // Character-types response will be checked and yield a string of random characters, equal to the length input by user multiplied by the number of character sets selected. (useChartypes())
   // Finally, this mega-string will be used to generate the final password, selecting characters from the string at random, and resulting in a password equal in length to the length set by user. (finalPassword())
   // The last line, 'return final', will log the resulting password as the value of the variable "final".
-  getLength()
-  getChartypes()
-  useChartypes()
+  length= getLength()
+  types= getChartypes()
+  allRandom=useChartypes()
   console.log(allRandom)
-  finalPassword()
+  final=finalPassword()
   return final
 }
 
