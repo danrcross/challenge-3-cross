@@ -21,8 +21,8 @@ var special= " !#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
 // For example, if the 'max' that is given for the function is 10 (randnum(10)), and Math.random() may produce .89. .89 will be multiplied by 10, resulting in 8.9. The Math.floor() method will then convert this number to 8 (it chops off the decimal/fraction).
 // These three lines of code were borrowed from an MDN web doc on the Math.random() method (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random)
 function randnum(max){
-  return Math.floor(Math.random() * max)
-}
+  return Math.floor(Math.random() * max);
+};
 
 // generates a random string of text composed of characters from the array selected in place of 'b'. 
 // First, the string of characters is split into an array of characters. 
@@ -35,8 +35,8 @@ function superGen(b) {
   output=output + a.toSpliced(0,a.length,a[randnum(a.length)])
   }
   console.log(output)
-  return output
-}
+  return output;
+};
 
 // This mega-function generates the password. It will be called when the "Generate Password" button is clicked.
 function generatePassword () {
@@ -53,28 +53,28 @@ function generatePassword () {
     }
     console.log("length set as " + length)
     window.confirm("You chose " + length + " as your length. Click OK to continue.") 
-    return length    
-  }
+    return length;
+  };
   
   // Allows user to choose which character sets they would like to be included in their randomly-generated password. A confirm() window will let user know what was logged as their response.
   // A response that does not specify at least one of the requested letters (U,L,N, or S) will result in a confirmation that all criteria are being selected (as a default).
   function getChartypes(){
-    types=(prompt("Would you like to include uppercase letters [U], lowercase letters [L], numerals (0-9) [N], and/or special characters [S](!#$%&'()*+,-./:;<=>?@[\]^_`{|}~)? Please respond with the specified letter(s) in brackets [U,L,N,S]. A response that does not include any of these letters will default in choosing ALL criteria."))
-    types=types.toUpperCase()
-    types=types.split("")    
-    console.log("User chose " + types + ".")
+    types=(prompt("Would you like to include uppercase letters [U], lowercase letters [L], numerals (0-9) [N], and/or special characters [S](!#$%&'()*+,-./:;<=>?@[\]^_`{|}~)? Please respond with the specified letter(s) in brackets [U,L,N,S]. A response that does not include any of these letters will default in choosing ALL criteria."));
+    types=types.toUpperCase();
+    types=types.split("");  
+    console.log("User chose " + types + ".");
     if (types.includes("U")||types.includes("L")||types.includes("N")||types.includes("S")){
     window.confirm("You chose " + types + ". Click OK to continue.") 
     }else {
       window.confirm("You chose ALL types. Click OK to continue.")
-    }
-    return types
+    };
+    return types;
   }
   
   // This function carries out the input of the user for the character set prompt. 
   // If the user response for getChartypes() includes any of these letters, the corresponding character set(s) will be included in the bank of random characters that will be drawn on for the final password.
   function useChartypes() {
-    allRandom=""
+    allRandom="";
     if (types.includes("U")) {
       allRandom= allRandom + superGen(ALPHA)
     }
@@ -88,15 +88,15 @@ function generatePassword () {
       allRandom= allRandom + superGen(special)
     }else if (!(types.includes("U")||types.includes("L")||types.includes("N")||types.includes("S"))){
       allRandom=allRandom+ superGen(alpha) + superGen(ALPHA) + superGen(numeral) + superGen(special)
-    }
-    return allRandom
+    };
+    return allRandom;
   }
   
   // This function takes the "allRandom" string that results from the concatenation of the strings that were randomly generated from the character sets that the user chose to include.
   // It uses this "allRandom" in the superGen() random generator function, resulting finally in a random password, the length of which is equivalent to the length originally input by the user.
   function finalPassword () {
-    final=superGen(allRandom)
-    return final
+    final=superGen(allRandom);
+    return final;
   }
 
   // The following lines are calling the previously established functions in the order in which they need to be executed. 
@@ -104,12 +104,12 @@ function generatePassword () {
   // Character-types response will be checked and yield a string of random characters, equal to the length input by user multiplied by the number of character sets selected. (useChartypes())
   // Finally, this mega-string will be used to generate the final password, selecting characters from the string at random, and resulting in a password equal in length to the length set by user. (finalPassword())
   // The last line, 'return final', will log the resulting password as the value of the variable "final".
-  length= getLength()
-  types= getChartypes()
-  allRandom=useChartypes()
-  console.log(allRandom)
-  final=finalPassword()
-  return final
+  length= getLength();
+  types= getChartypes();
+  allRandom=useChartypes();
+  console.log(allRandom);
+  final=finalPassword();
+  return final;
 }
 
 // Get references to the #generate element
@@ -125,7 +125,7 @@ function writePassword() {
 
   passwordText.value = password;
 
-}
+};
 
 // Add event listener to generate button
 // This makes the "Generate Password" button respond to a "click" by executing the writePassword() function.
