@@ -12,6 +12,7 @@ Through the development of this tool, I learned many aspects of how JavaScript o
 - The declaration of functions with/without parameters
 - The calling of those functions with/without arguments
 - The use of arrays
+- The use of iterations (while loop)
 
 ## Installation
 
